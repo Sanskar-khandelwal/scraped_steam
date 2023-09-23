@@ -1,6 +1,7 @@
 import scrapy
 from ..items import SteamItem
 from w3lib.html import remove_tags
+# from scrapy.loader import ItemLoader
 
 
 class BestSellingSpider(scrapy.Spider):
@@ -44,6 +45,26 @@ class BestSellingSpider(scrapy.Spider):
         steam_item = SteamItem()
         games = response.xpath('//div[@id = "search_resultsRows"]/a')
         for game in games:
+            # loader = ItemLoader(
+            #     item=SteamItem(), selector=game, response=response)
+            # loader.add_xpath('game_url', ".//@href")
+            # loader.add_xpath(
+            #     'img_url', ".//div[@class = 'col search_capsule']/img/@src")
+            # loader.add_xpath(
+            #     'game_name', ".//div[@class = 'responsive_search_name_combined']/div/span/text()")
+            # loader.add_xpath(
+            #     'release_date', ".//div[@class = 'responsive_search_name_combined']/div[@class ='col search_released responsive_secondrow']/text()")
+            # loader.add_xpath(
+            #     'platforms', ".//span[contains(@class, 'platform_img') or @class = 'vr_supported']/@class")
+            # loader.add_xpath(
+            #     'review_summary', ".//span[contains(@class, 'search_review_summary')]/@data-tooltip-html")
+            # loader.add_xpath(
+            #     'discount_rate', ".//div[contains(@class, 'search_discount_block')]/div[@class = 'discount_pct']/text()")
+            # loader.add_xpath('discounted_price',
+            #                  ".//div[@class = 'discount_prices']")
+            # loader.add_xpath(
+            #     'original_price', ".//div[@class = 'discount_original_price']/text()']")
+
             steam_item['game_url'] = game.xpath(".//@href").get()
             steam_item['img_url'] = game.xpath(
                 ".//div[@class = 'col search_capsule']/img/@src").get()
