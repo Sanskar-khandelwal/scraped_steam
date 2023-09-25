@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/bootstrap.min.css')}}"
+    />
+    <title>Steam Top 100 Games</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-primary navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand text-light" href="#">SteamGames</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="card" style="width: full; text-align: center">
+        <div class="card-body">
+          <h5 class="card-title display-2">Steam Top Games</h5>
+          <p class="card-text display-5">
+            I scraped top 100 games of steam store
+          </p>
+          <a href="/show" class="btn btn-primary mt-4 display-5">Show Games</a>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="container"
+      style="
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+      "
+    >
+      {%for game in games%}
+      <div class="card" style="width: 18rem">
+        <img src="{{game.get('img_url')}}" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{game.get('game_name')}}</h5>
+          <p class="card-text">Supported Platform: {{game.get('platforms')}}</p>
+          <a href="{{game.get('game_url')}}" class="btn btn-primary"
+            >Game Link</a
+          >
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
